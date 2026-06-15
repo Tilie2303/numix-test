@@ -1,0 +1,162 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * NUMIX — Luxury Intelligence
+ * Deep black · Soft white · Radiant Intelligence Blue (light, not color)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-aura: var(--aura);
+  --color-ice: var(--ice);
+  --color-moonlight: var(--moonlight);
+
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Softer charcoal foundation — refined, breathable, not OLED black */
+  --background: oklch(0.24 0.005 250);
+  --foreground: oklch(0.96 0.003 250);
+
+  /* Elevated surfaces — cards sit above background through tone, not borders */
+  --card: oklch(0.275 0.006 250);
+  --card-foreground: oklch(0.96 0.003 250);
+  --popover: oklch(0.295 0.007 250);
+  --popover-foreground: oklch(0.96 0.003 250);
+
+  /* Radiant intelligence blue — ice / moonlight, luminous and high-contrast */
+  --primary: oklch(0.80 0.14 235);
+  --primary-foreground: oklch(0.17 0.005 250);
+  --aura: oklch(0.82 0.18 240);
+  --ice: oklch(0.95 0.13 230);
+  --moonlight: oklch(0.88 0.12 235);
+
+  --secondary: oklch(0.305 0.007 250);
+  --secondary-foreground: oklch(0.92 0.003 250);
+  --muted: oklch(0.295 0.006 250);
+  --muted-foreground: oklch(0.78 0.012 250);
+  --accent: oklch(0.78 0.09 235);
+  --accent-foreground: oklch(0.17 0.005 250);
+
+  --destructive: oklch(0.62 0.18 25);
+  --destructive-foreground: oklch(0.96 0.003 250);
+
+  --border: oklch(0.36 0.008 250 / 45%);
+  --input: oklch(0.34 0.008 250);
+  --ring: oklch(0.72 0.12 240 / 60%);
+}
+
+.dark {
+  --background: oklch(0.24 0.005 250);
+  --foreground: oklch(0.96 0.003 250);
+}
+
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: oklch(0.72 0.12 240 / 30%);
+    color: var(--color-foreground);
+  }
+}
+
+@layer utilities {
+  .font-serif { font-family: var(--font-serif); }
+  .font-sans { font-family: var(--font-sans); }
+
+  /* The aura — blue behaves like light, not fill */
+  .aura-field {
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 50%,
+        oklch(0.82 0.18 240 / 0.22) 0%,
+        oklch(0.82 0.18 240 / 0.08) 35%,
+        transparent 70%);
+  }
+  .aura-hero {
+    background:
+      radial-gradient(ellipse 50% 60% at 50% 40%,
+        oklch(0.82 0.18 240 / 0.28) 0%,
+        oklch(0.82 0.18 240 / 0.10) 30%,
+        transparent 65%);
+  }
+  .aura-soft {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%,
+        oklch(0.82 0.18 240 / 0.14) 0%,
+        transparent 70%);
+  }
+  .text-aura {
+    text-shadow: 0 0 30px oklch(0.82 0.18 240 / 0.55), 0 0 60px oklch(0.82 0.18 240 / 0.35);
+  }
+  .border-aura {
+    border-color: oklch(0.82 0.18 240 / 0.35);
+    box-shadow:
+      0 0 0 1px oklch(0.82 0.18 240 / 0.12),
+      0 0 60px -10px oklch(0.82 0.18 240 / 0.35);
+  }
+  .grain {
+    background-image:
+      radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.015) 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+.animate-aura { animation: aura-pulse 6s ease-in-out infinite; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.35s; }
+.delay-3 { animation-delay: 0.55s; }
+.delay-4 { animation-delay: 0.8s; }
